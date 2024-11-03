@@ -38,8 +38,7 @@
       </van-swipe-item>
     </van-swipe>
   </div>
-  
-  <van-row>
+  <van-row style="margin-top: 8px;">
     <div class="twoSpan">
       <span style="width: 45%;">
         <van-image
