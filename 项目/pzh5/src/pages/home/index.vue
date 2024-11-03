@@ -4,55 +4,62 @@
       当前地区
       <van-icon name="arrow"></van-icon>
     </div>
-    <van-search
-    @update:model-value="onUpdate"
-      v-model= "searchValue"
-      shape="round"
-      placeholder="请输入医院名称"
-    />
+    <div class="search">
+      <van-search
+        @update:model-value="onUpdate"
+        v-model= "searchValue"
+        shape="round"
+        placeholder="请输入医院名称"
+      />
+    </div>
   </div>
-  <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-    <van-swipe-item>
-      <van-image
-        src="/public/1.jpg"
-        radius="8"
-        class="my-swiper"
-        height="175px"
-      />
-    </van-swipe-item>
-    <van-swipe-item>
-      <van-image
-        src="/public/2.jpg"
-        radius="8"
-        class="my-swiper"
-        height="175px"
-      />
-    </van-swipe-item>
-    <van-swipe-item>
-      <van-image
-        src="/public/3.jpg"
-        radius="8"
-        class="my-swiper"
-        height="175px"
-      />
-    </van-swipe-item>
-  </van-swipe>
-  <van-row justify="space-around">
-    <van-col span="10">
-      <van-image
-        src="/public/nav1.jpg"
-        radius="5"
-        @click="goOrderone()"
-      />
-    </van-col>
-    <van-col span="10">
-      <van-image
+  <div class="box">
+    <van-swipe class="swipe" :autoplay="3000" indicator-color="white">
+      <van-swipe-item>
+        <van-image
+          src="/public/1.jpg"
+          radius="8"
+          width="100%"
+        />
+      </van-swipe-item>
+      <van-swipe-item>
+        <van-image
+          src="/public/2.jpg"
+          radius="8"
+          width="100%"
+        />
+      </van-swipe-item>
+      <van-swipe-item>
+        <van-image
+          src="/public/3.jpg"
+          radius="8"
+          width="100%"
+        />
+      </van-swipe-item>
+    </van-swipe>
+  </div>
+  
+  <van-row>
+    <div class="twoSpan">
+      <span style="width: 45%;">
+        <van-image
+          style="width: 100%;"
+          src="/public/nav1.jpg"
+          radius="5"
+          @click="goOrderone()"
+        />
+      </span>
+      <span class="rightSpan">
+        <van-image
+        style="width: 100%;"
         src="/public/nav2.jpg"
         radius="5"
         @click="goOrdertwo()"
       />
-    </van-col>
+      </span>
+    </div>
   </van-row>
+
   <!-- 下方为列表 -->
   <van-row
     @click="goOrder(item)"
@@ -134,22 +141,41 @@ const onUpdate = async (val) => {
 </script>
 
 <style lang="less" scoped>
-.header {
+  .header {
+      display: flex;
+      height: 5vh;
+      justify-content: space-between;
+      margin: 5px;
+      line-height: 46px;
+      .header-left {
+        padding-left:30px;
+        background: url('/public/OIP-C.jpeg') no-repeat #ffffff left center ;
+        background-size: 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #666666;
+      }
+      .search{
+        width: 60%;
+      }
+    }
+  .box{
+    width: 100vm;
     display: flex;
-    justify-content: space-between;
-    margin: 5px;
-    line-height: 54px;
-    .header-left {
-      padding-left: 22px;
-      background: url('/public/OIP-C.jpeg') no-repeat #ffffff left ;
-      background-size: 18px;
-      font-size: 13px;
-      font-weight: bold;
-      color: #666666;
+    justify-content: center;
+    align-items: center;
+    .swipe{
+      width: 95%;
     }
   }
-  .my-swiper {
-    margin: 5px 5px 5px 12px;
+  .twoSpan{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 95%;
+    .rightSpan{
+      width: 45%;
+    }
   }
   .yy-list {
     padding-bottom: 10px;
