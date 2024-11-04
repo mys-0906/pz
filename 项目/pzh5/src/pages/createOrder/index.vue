@@ -125,7 +125,7 @@
       />
     </template>
   </van-cell-group>
-  <van-button round block type="primary" native-type="submit">
+    <van-button round block type="primary" native-type="submit">
       提交订单
     </van-button>
 </van-form>
@@ -148,6 +148,7 @@ const createInfo = reactive({
 })
 // 表单数据
 const form = reactive({
+  price: '',
   beizhu: '',
   phone: '',
   // 地址
@@ -161,12 +162,12 @@ const hospitalsId = ref(null)
 
 // 服务相关
 const columns = reactive([
-  { text: '就医陪诊',value: 0},
-  { text: '诊前约号',value: 1},
-  { text: '代办买药',value: 2},
-  { text: '院内陪护',value: 3},
-  { text: '术后陪护',value: 4},
-  { text: '产后陪护',value: 5},
+  { text: '就医陪诊：￥199',value: 0},
+  { text: '诊前约号：￥59',value: 1},
+  { text: '代办买药：￥69',value: 2},
+  { text: '院内陪护：￥149',value: 3},
+  { text: '术后陪护：￥69',value: 4},
+  { text: '产后陪护：￥139',value: 5},
 ])
 let hospitalsList = reactive([])
 // 弹出层初始状态
@@ -195,7 +196,12 @@ const confirmTime = ({selectedOptions}) => {
 };
 const onConfirm = ({selectedOptions}) => {
   showPicker.value = false;
-  form.serve = selectedOptions[0].text 
+  if (selectedOptions[0].value == 0 || selectedOptions[0].value == 3 || selectedOptions[0].value == 5) {
+    form.price = selectedOptions[0].text.slice(-3)
+  } else {
+    form.price = selectedOptions[0].text.slice(-2)
+  }
+  form.serve = selectedOptions[0].text.slice(0,4)
 };
 const confirmYy = ({selectedOptions}) => {
   showYy.value = false;

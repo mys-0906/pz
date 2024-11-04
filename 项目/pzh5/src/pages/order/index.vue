@@ -17,19 +17,39 @@
           <div>预约时间:{{ item.nowTime }}</div>
         </div>
       </van-col>
-      <van-col span="5"></van-col>
+      <van-col :style="{color: colorMap[item.active]}" span="5">
+        <div style="margin-bottom: 6px;">{{ item.info }}</div>
+        <span>{{'￥:' + item.price }}</span>
+      </van-col>
     </van-row>
+    <div class="bottom-text">没有更多了</div>
   </div>
 </template>
 
 <script setup>
 import { ref,onMounted } from 'vue';
-import { getDd } from '../../api';
+import { getDd } from '../../api'; 
+const colorMap = {
+  '1': '#ffa200',
+  '2': '#1da6fd',
+  '3': '#21c521'
+}
 const active = ref('')
 const order = ref([])
 const getDdInfo = async (active) => {
   const {data:{dd}}  = await getDd({ active })
   order.value = dd
+  order.value.forEach(item => {
+    if (item.active == 1) {
+      item.info = '待支付'
+    } else if(item.active == 2){
+      item.info = '待服务'
+    } else if (item.active == 3) {
+      item.info = '已完成'
+    }
+  })
+  console.log(order.value);
+  
 }
 onMounted(() => {
   getDdInfo(0)

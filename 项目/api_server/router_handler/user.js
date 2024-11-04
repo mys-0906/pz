@@ -318,7 +318,7 @@ exports.postDd = (req, res) => {
   const ddinfo = req.body
   console.log(ddinfo);
   const sql = 'insert into dd set ?'
-  db.query(sql, { serve: ddinfo.serve, hospitalsName: ddinfo.hospitalsName, phone: ddinfo.phone, dz: ddinfo.dz, pzs: ddinfo.pzs, nowTime: ddinfo.nowTime, beizhu: ddinfo.beizhu }, (err, results) => {
+  db.query(sql, { serve: ddinfo.serve, hospitalsName: ddinfo.hospitalsName, phone: ddinfo.phone, dz: ddinfo.dz, pzs: ddinfo.pzs, nowTime: ddinfo.nowTime, beizhu: ddinfo.beizhu,price: ddinfo.price }, (err, results) => {
     if (err) return res.cc(err)
     if(results.affectedRows !==1){
       return res.cc('新增失败')
@@ -330,7 +330,7 @@ exports.postDd = (req, res) => {
 exports.getDd = (req, res) => {
   const active = req.query.active
   const sql = 'select * from dd where active = ?'
-  const sqlAll = 'select * from dd'
+  const sqlAll = 'select * from dd where active !=4 order by active'
   if (active == '0') {
     db.query(sqlAll, (err, results) => {
       if (err) return res.cc(err)
